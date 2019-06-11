@@ -90,6 +90,7 @@ class Attendance(models.Model):
 class SampleModel(models.Model):
     movie = models.CharField(max_length = 200)
     IMDB  = models.IntegerField()
+    
 
     def __str__(self):
         return self.movie
