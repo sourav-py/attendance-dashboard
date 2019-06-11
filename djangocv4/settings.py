@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'attendance',
+    'import_export',
 ]
 
 MIDDLEWARE = [
@@ -126,4 +127,5 @@ LOGIN_URL = '/auth_urls/login/'
 LOGIN_REDIRECT_URL = '/students/'
 LOGOUT_REDIRECT_URL = '/'
 SIGNUP_REDIRECT_URL = '/'
+IMPORT_EXPORT_USE_TRANSACTIONS = True
 

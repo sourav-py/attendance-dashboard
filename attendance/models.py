@@ -84,3 +84,13 @@ class Attendance(models.Model):
 
     def __str__(self):
         return self.month
+
+
+
+class SampleModel(models.Model):
+    movie = models.CharField(max_length = 200)
+    IMDB  = models.IntegerField()
+
+    def __str__(self):
+        return self.movie
+

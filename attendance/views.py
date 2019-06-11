@@ -2,11 +2,13 @@ from django.shortcuts import render,HttpResponseRedirect
 from django.http import HttpResponse
 from .models import Student
 from django.contrib.auth import login
-from .models import User
+from .models import User,SampleModel
 from django.views.generic import CreateView
 from .models import CustomUser,Attendance
 from .forms import StudentSignUpForm,TeacherSignUpForm
 from django.contrib.auth.decorators import login_required, user_passes_test
+from tablib import Dataset
+from .resources import SampleModelResource
 # Create your views here.
 
 def is_staff(user):
@@ -60,5 +62,19 @@ class TeacherSignUpView(CreateView):
         return HttpResponseRedirect('/students/')
 
 
+def simple_upload(request):
+    if request.method == 'POST':
+       
+        csvfile = request.FILES['myfile']
+        data = pd.read_csv(csvfile)
+        for i in data.values:
+            id = i[0]
+            movie = i[1]
+            imdb = i[2]
+            print(id,movie,imdb)
+            return HttpResponse('Check shell!')
+    
+
+    return render(request, 'simple_upload.html')
 
 
