@@ -1,0 +1,28 @@
+<html>
+    <head>
+        <style>
+            .week 
+            {
+                border: 1x solid orange;
+                padding: 3%;
+                margin-left:5%;
+            }
+        </style>
+    </head>
+    <body>
+        <p><h3>ID : {{student.id}}</h3></p>
+        <p><h2>Name : {{student.name}}</h3></p>
+        {% for attendance in attendances %}
+            <div class="week">
+            <p><h3>Attendance for week starting from {{attendance.starting_date}}</h3></p>
+            <p>Monday : {{attendance.monday}}</p>
+            <p>Tuesday : {{attendance.tuesday}}</p>
+            <p>Wednesday : {{attendance.wednesday}} </p>
+            <p>Thursday : {{attendance.thursday}}</p>
+            <p>Friday : {{attendance.friday}}</p>
+            <p>Saturday : {{attendance.saturday}}</p>
+            </div>
+        {% endfor %}
+        
+    </body>
+</html>

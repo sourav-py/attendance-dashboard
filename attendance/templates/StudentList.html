@@ -1,0 +1,25 @@
+<html>
+    <head>
+        <title>stuents list</title>
+        <style>
+            .student_detail_div
+            {
+                border : 2px solid grey;
+                width : 60%;
+                padding: 3%;
+                margin-left: 10%;
+                margin-right: 10%;
+            }
+        </style>
+    </head>
+    <body>
+        {% for student in students %}
+            <div class = "student_detail_div">
+            <P>ID : {{student.id}} </P>
+            <p>Name : <a href = "/student-attendance/{{student.id}}/">{{student.name}}</a></p>
+            <p>User Name : {{student.user}}</p>
+            </div>
+        {% endfor %}
+    
+    </body>
+</html>
