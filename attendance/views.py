@@ -155,7 +155,7 @@ def Attendance_Csv_Upload(request):
 
 
 @api_view(['GET','POST'])
-def SampleModelList(request):
+def SampleModelListAPI(request):
 
     if request.method == 'GET':
         return HttpResponse('inside get request')
@@ -165,6 +165,19 @@ def SampleModelList(request):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+def SampleModelList(request):
+    if request.method == 'GET':
+        sample = 'GET REQUEST'
+        return HttpResponse(sample)
+
+    if request.method == 'POST':
+        movie = request.post.get('movie')
+        IMDB = request.post.get('IMDB')
+
+        response = str(movie) + str(IMDB)
+        return HttpResponse(response)
+
 
 
 
