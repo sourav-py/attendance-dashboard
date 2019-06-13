@@ -30,48 +30,13 @@ class Student(models.Model):
         return 5
 
 
-class Week(models.Model):
-    MonthChoices = (
-        ('January','Jan'),
-        ('February','Feb'),
-        ('March','Mar'),
-        ('April','Apr'),
-        ('May','May'),
-        ('June','Jun'),
-        ('July','Jul'),
-        ('August','Aug'),
-        ('September','Sep'),
-        ('October','Oct'),
-        ('November','Nov'),
-        ('December','Dec'),
 
-    )
-    month = models.CharField(choices = MonthChoices,max_length = 100)
-    starting_date = models.DateField(default = datetime.now)
-    year = models.DateTimeField(default = get_year)
 
 
   
     
 class Attendance(models.Model):
-    ATTENDANCE_CHOICES = (('Present','P'),('Absent','A'),('NA','NA'))
-    MonthChoices = (
-        ('January','Jan'),
-        ('February','Feb'),
-        ('March','Mar'),
-        ('April','Apr'),
-        ('May','May'),
-        ('June','Jun'),
-        ('July','Jul'),
-        ('August','Aug'),
-        ('September','Sep'),
-        ('October','Oct'),
-        ('November','Nov'),
-        ('December','Dec'),
-
-    )
-    month = models.CharField(choices = MonthChoices,max_length = 100)
-    year = models.BigIntegerField(default = get_year)
+    ATTENDANCE_CHOICES = (('Present','P'),('Absent','A'),('NA','NA')) 
     starting_date = models.DateField(default = datetime.now)
     user = models.ManyToManyField(Student)
     monday = models.CharField(choices = ATTENDANCE_CHOICES,max_length = 10,default = 'P')
@@ -83,7 +48,7 @@ class Attendance(models.Model):
 
 
     def __str__(self):
-        return self.month
+        return self.starting_date
 
 
 

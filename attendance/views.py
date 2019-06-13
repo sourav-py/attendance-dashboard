@@ -9,7 +9,13 @@ from .forms import StudentSignUpForm,TeacherSignUpForm
 from django.contrib.auth.decorators import login_required, user_passes_test
 from tablib import Dataset
 from .resources import SampleModelResource
-# Create your views here.
+import pandas as pd
+from django.contrib.auth import authenticate
+from rest_framework import status
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+
+from attendance.serializers import SampleModelSerializer
 
 def is_staff(user):
     object = CustomUser.objects.get(id = user.id)
@@ -22,8 +28,11 @@ def is_student_teacher_admin(user):
     pass
 
 @login_required
-@user_passes_test(is_staff)
+#@user_passes_test(is_staff)
 def StudentList(request):
+    """
+        Lists all the students in the database with their attendance link available for the teacher or the student itself.
+    """
     students= Student.objects.all()
     attendances = Attendance.objects.all()
     return render(request,'StudentList.html',{'students':students,'attendances':attendances})
@@ -31,6 +40,9 @@ def StudentList(request):
 @login_required
 
 def StudentAttendance(request,pk):
+    """
+        overview of the attendance of student(can be opened by the teacher or the student itself)
+    """
     student = Student.objects.get(id = pk)
     attendances = Attendance.objects.filter(user = student)
     if request.user.is_teacher == True or request.user == student.user:
@@ -62,7 +74,10 @@ class TeacherSignUpView(CreateView):
         return HttpResponseRedirect('/students/')
 
 
-def simple_upload(request):
+def Sample_Model_Csv_Upload(request):
+    """
+        uploads csv file of Sample Model and stores it in database
+    """
     if request.method == 'POST':
        
         csvfile = request.FILES['myfile']
@@ -72,9 +87,85 @@ def simple_upload(request):
             movie = i[1]
             imdb = i[2]
             print(id,movie,imdb)
-            return HttpResponse('Check shell!')
+            new_sample_object = SampleModel.objects.create(movie = movie,IMDB = imdb)
+            new_sample_object.save()
+        return HttpResponse('Check shell!')
     
 
-    return render(request, 'simple_upload.html')
+    return render(request, 'sample_model_csv_upload.html')
+
+def Student_Csv_Upload(request):
+    """
+        uploads csv file of students and stores it in database
+    """
+    initial_users_list = []
+    if request.method == 'POST':
+        csvfile = request.FILES['myfile']
+        data = pd.read_csv(csvfile)
+        for i in data.values:
+            username = i[0]
+            password = i[1]
+            first_name = i[2]
+            last_name = i[3]
+            #check if it is already present in db
+            initial_users = CustomUser.objects.all()
+            for user in initial_users:
+                initial_users_list.append(str(user.username))
+            if username not in initial_users_list:    
+                print(username,password,first_name,last_name)
+                new_user_object = CustomUser.objects.create_user(username = username,password=password,first_name = first_name,last_name = last_name,is_student = True)
+                new_user_object = authenticate(username=username,password=password)
+                new_user_object.save()
+                student_object = Student.objects.create(user = new_user_object,name=str(str(first_name)+" "+str(last_name)))
+                student_object.save()
+            
+        return HttpResponseRedirect('/students/')
+    
+
+    return render(request, 'student_csv_upload.html')
+
+def Attendance_Csv_Upload(request):
+    initial_attendance_list = []
+    if request.method == 'POST':
+        csvfile = request.FILES['myfile']
+        data = pd.read_csv(csvfile)
+        for i in data.values:
+            starting_date = i[0]
+            username = i[1]
+            monday = i[2]
+            tuesday = i[3]
+            wednesday = i[4]
+            thursday = i[5]
+            friday = i[6]
+            saturday = i[7]
+            new_attendance_object = Attendance.objects.create(starting_date = starting_date,monday = monday,tuesday = tuesday,wednesday = wednesday,thursday=thursday,friday=friday,saturday=saturday)
+            new_attendance_object.user.add(Student.objects.get(user=CustomUser.objects.get(username = username)))
+            new_attendance_object.save()
+            
+        return HttpResponseRedirect('/students/')
+    
+
+    return render(request, 'student_csv_upload.html')
+
+
+
+
+
+#----------------------API views-------------------------------
+
+
+@api_view(['GET','POST'])
+def SampleModelList(request):
+
+    if request.method == 'GET':
+        return HttpResponse('inside get request')
+    if request.method == 'POST':
+        serializer = SampleModelSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
 
 
