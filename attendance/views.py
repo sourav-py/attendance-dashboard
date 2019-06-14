@@ -172,12 +172,7 @@ def SampleModelList(request):
         return HttpResponse(sample)
 
     if request.method == 'POST':
-        movie = request.post.get('movie')
-        IMDB = request.post.get('IMDB')
-
-        response = str(movie) + str(IMDB)
-        return HttpResponse(response)
-
+        return HttpResponse('post request!')
 
 
 
