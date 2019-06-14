@@ -2,7 +2,7 @@
 import requests 
 
 # defining the api-endpoint 
-API_ENDPOINT = "http://sourav2k.pythonanywhere.com/api-view/samplemodel/"
+API_ENDPOINT = "http://sourav2k.pythonanywhere.com/post/samplemodel/"
 
 
 

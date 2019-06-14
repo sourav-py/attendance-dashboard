@@ -158,14 +158,17 @@ reciever_list = ["hey",]
 def SampleModelListAPI(request):
 
     if request.method == 'GET':
-        return HttpResponse('inside get request')
+        sample = reciever_list[1]
+        return HttpResponse(sample)
     if request.method == 'POST':
+        reciever_list.append("hello")
+        """
         serializer = SampleModelSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
+        """
 def SampleModelList(request):
     if request.method == 'GET':
         sample = reciever_list[1]
