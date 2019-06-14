@@ -3,6 +3,7 @@ from attendance import views
 from django.conf.urls import url
 
 urlpatterns = [
+    path('',views.base,name = 'base'),
     path('students/',views.StudentList,name = 'StudentList'),
     path('accounts/signup/student/', views.StudentSignUpView.as_view(), name='student_signup'),
     path('accounts/signup/teacher/', views.TeacherSignUpView.as_view(), name='teacher_signup'),  
@@ -10,8 +11,9 @@ urlpatterns = [
     #path('upload/csv/',views.simple_upload,name = 'simple_upload'),
     path('upload/csv/students/',views.Student_Csv_Upload),
     path('upload/csv/attendance/',views.Attendance_Csv_Upload),
-    
     path('api-view/samplemodel/',views.SampleModelEndpoint),
+    path('login/student/',views.login_student),
+    path('login/teacher/',views.login_teacher),
  
 
 ]

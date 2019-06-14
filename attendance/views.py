@@ -16,6 +16,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 from attendance.serializers import SampleModelSerializer
+from django.views.decorators.cache import never_cache
 
 def is_staff(user):
     object = CustomUser.objects.get(id = user.id)
@@ -27,30 +28,107 @@ def is_staff(user):
 def is_student_teacher_admin(user):
     pass
 
+def count_attendance(id):
+    count = 0
+    student_object = Student.objects.get(id = id)
+    attendances = Attendance.objects.filter(user = student_object)
+    print(attendances[0])
+    for attendance in attendances:
+        if attendance.monday == 'Present':
+            count += 1
+        if attendance.tuesday == 'Present':
+            count += 1
+        if attendance.wednesday == 'Present':
+            count += 1
+        if attendance.thursday == 'Present':
+            count +=1
+        if attendance.friday == 'Present':
+            count +=1
+        if attendance.saturday == 'Present':
+            count +=1
+    return count
+
+
+def out_of_attendance(id):
+    count = 0
+    student_object = Student.objects.get(id = id)
+    attendances = Attendance.objects.filter(user = student_object)
+    for attendance in attendances:
+        if attendance.monday == 'Present' or attendance.monday == 'Absent':
+            count += 1
+        if attendance.tuesday == 'Present' or attendance.tuesday == 'Absent':
+            count += 1
+        if attendance.wednesday == 'Present' or attendance.wednesday == 'Absent':
+            count += 1
+        if attendance.thursday == 'Present' or attendance.thursday == 'Absent':
+            count +=1
+        if attendance.friday == 'Present' or attendance.friday == 'Absent':
+            count +=1
+        if attendance.saturday == 'Present' or attendance.saturday == 'Absent':
+            count +=1
+    return count
+
+
+
+def base(request):
+    return render(request,'base.html',{'request':request})
+
+
+
 @login_required
-#@user_passes_test(is_staff)
+@user_passes_test(is_staff)
 def StudentList(request):
-    """
-        Lists all the students in the database with their attendance link available for the teacher or the student itself.
-    """
     students= Student.objects.all()
     attendances = Attendance.objects.all()
     return render(request,'StudentList.html',{'students':students,'attendances':attendances})
 
 @login_required
-
 def StudentAttendance(request,pk):
-    """
-        overview of the attendance of student(can be opened by the teacher or the student itself)
-    """
     student = Student.objects.get(id = pk)
     attendances = Attendance.objects.filter(user = student)
     if request.user.is_teacher == True or request.user == student.user:
-        return render(request,'StudentAttendance.html',{'student':student,'attendances':attendances})
+        attendance_variable = count_attendance(pk)
+        out_of_attendance_variable = out_of_attendance(pk)
+        attendance_percentage = (attendance_variable/out_of_attendance_variable)*100
+        if attendance_percentage < 75:
+            message = "your attendance is below 75%, you are expected to have more than 75% to sit in exams!!!"
+        return render(request,'StudentAttendance.html',{'student':student,'attendances':attendances,'attendance_variable':attendance_variable,'out_of_attendance_variable':out_of_attendance_variable,'attendance_percentage':attendance_percentage,'message':message})
     else:
-        return HttpResponse('You can\' access this')
+        return HttpResponse('You can\'t access this')
 
 
+def login_student(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(username=username, password=password)
+        if user is not None and user.is_student == True:
+            if user.is_active:
+                login(request, user)
+                student_object_id = Student.objects.get(user = user).id
+                return HttpResponseRedirect('/student-attendance/%s'%(student_object_id))
+                
+        else:
+            message = "please enter correct credentials(it must be of student)"
+            return render(request,'registration/studentlogin.html',{'request':request,'message':message})
+    else:
+        return render(request,'registration/studentlogin.html',{'request':request})
+
+def login_teacher(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(username=username, password=password)
+        if user is not None and user.is_teacher == True:
+            if user.is_active:
+                login(request, user)
+                return HttpResponseRedirect('/students/')
+        else:
+            message = "please enter correct credentials(it must be of teacher)"
+            return render(request,'registration/teacherlogin.html',{'request':request,'message':message})
+    else:
+        return render(request,'registration/teacherlogin.html',{'request':request})
+        
 
 class StudentSignUpView(CreateView):
     model = CustomUser
@@ -75,9 +153,6 @@ class TeacherSignUpView(CreateView):
 
 
 def Sample_Model_Csv_Upload(request):
-    """
-        uploads csv file of Sample Model and stores it in database
-    """
     if request.method == 'POST':
        
         csvfile = request.FILES['myfile']
@@ -95,9 +170,6 @@ def Sample_Model_Csv_Upload(request):
     return render(request, 'sample_model_csv_upload.html')
 
 def Student_Csv_Upload(request):
-    """
-        uploads csv file of students and stores it in database
-    """
     initial_users_list = []
     if request.method == 'POST':
         csvfile = request.FILES['myfile']
@@ -170,7 +242,7 @@ def SampleModelEndpoint(request):
         reciever_list.append(str(IMDB))
         new_sample_object = SampleModel.objects.create(movie = movie,IMDB = IMDB)
         new_sample_object.save()
-        return HttpResponse('hey')    
+        return HttpResponse('Your model is saved!')    
     
 
 

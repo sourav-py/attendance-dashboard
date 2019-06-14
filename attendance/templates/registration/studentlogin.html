@@ -4,8 +4,10 @@
 
     </head>
     <body>
-            <form method="post">
+            <h1>STUDENT LOGIN PAGE</h1>
+            <form method="post" action = "/login/student/">
             <div class="login_logo"><h1><span id = "log">log</span>in</h1></div>
+            {{message}}
             <div class="mini_form">
                 {% csrf_token %}
                 <div class="creds">

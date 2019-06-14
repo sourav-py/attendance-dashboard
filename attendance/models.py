@@ -30,25 +30,22 @@ class Student(models.Model):
         return 5
 
 
-
-
-
-  
     
 class Attendance(models.Model):
     ATTENDANCE_CHOICES = (('Present','P'),('Absent','A'),('NA','NA')) 
     starting_date = models.DateField(default = datetime.now)
     user = models.ManyToManyField(Student)
-    monday = models.CharField(choices = ATTENDANCE_CHOICES,max_length = 10,default = 'P')
-    tuesday = models.CharField(choices = ATTENDANCE_CHOICES,max_length = 10,default = 'P')
-    wednesday = models.CharField(choices = ATTENDANCE_CHOICES,max_length = 10,default = 'P')
-    thursday = models.CharField(choices = ATTENDANCE_CHOICES,max_length = 10,default = 'P')
-    friday = models.CharField(choices = ATTENDANCE_CHOICES,max_length = 10,default = 'P')
-    saturday = models.CharField(choices = ATTENDANCE_CHOICES,max_length = 10,default = 'P')
+    monday = models.CharField(choices = ATTENDANCE_CHOICES,max_length = 10,default = 'NA')
+    tuesday = models.CharField(choices = ATTENDANCE_CHOICES,max_length = 10,default = 'NA')
+    wednesday = models.CharField(choices = ATTENDANCE_CHOICES,max_length = 10,default = 'NA')
+    thursday = models.CharField(choices = ATTENDANCE_CHOICES,max_length = 10,default = 'NA')
+    friday = models.CharField(choices = ATTENDANCE_CHOICES,max_length = 10,default = 'NA')
+    saturday = models.CharField(choices = ATTENDANCE_CHOICES,max_length = 10,default = 'NA')
 
 
     def __str__(self):
-        return self.starting_date
+        starting_date = str(self.starting_date)
+        return starting_date
 
 
 
