@@ -168,7 +168,7 @@ def SampleModelListAPI(request):
 
 def SampleModelList(request):
     if request.method == 'GET':
-        sample = reciever_list[0]
+        sample = reciever_list[1]
         return HttpResponse(sample)
 
     if request.method == 'POST':
