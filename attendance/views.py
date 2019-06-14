@@ -159,14 +159,10 @@ def SampleModelEndpoint(request):
 
     if request.method == 'GET':
         sample = reciever_list[0]
-        sample2 = reciever_list[1]
-        response = str(sample) + str(sample2)
         return HttpResponse(sample)
     if request.method == 'POST':
-        movie = request.post('movie')
-        IMDB = request.post('IMDB')
-        reciever_list.append(str(movie))
-        reciever_list.append(str(IMDB))
+        reciever_list.append("hello")
+        return HttpResponse('hey')
     
 
 
