@@ -13,4 +13,5 @@ data = {'movie':'John wick',
 
 # sending post request and saving response as response object 
 r = requests.post(url = API_ENDPOINT, data = data) 
+print(r)
 
