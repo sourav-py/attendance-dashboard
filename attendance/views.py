@@ -153,7 +153,7 @@ def Attendance_Csv_Upload(request):
 
 #----------------------API views-------------------------------
 
-
+reciever_list = []
 @api_view(['GET','POST'])
 def SampleModelListAPI(request):
 
@@ -168,10 +168,12 @@ def SampleModelListAPI(request):
 
 def SampleModelList(request):
     if request.method == 'GET':
-        sample = 'GET REQUEST'
+        sample = reciever_list[0]
         return HttpResponse(sample)
 
     if request.method == 'POST':
+        movie = request.post.get('movie')
+        reciever_list.append(str(movie))
         return HttpResponse('post request!')
 
 
