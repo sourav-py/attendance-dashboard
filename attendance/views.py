@@ -158,8 +158,9 @@ reciever_list = []
 def SampleModelEndpoint(request):
 
     if request.method == 'GET':
-        sample = reciever_list[0]
-        sample2 = reciever_list[1]
+        n = len(reciever_list)
+        sample = reciever_list[n-1]
+        sample2 = reciever_list[n-2]
         response = str(sample) + str(sample2)
         return HttpResponse(response)
     if request.method == 'POST':
@@ -167,6 +168,8 @@ def SampleModelEndpoint(request):
         IMDB = request.data['IMDB']
         reciever_list.append(str(movie))
         reciever_list.append(str(IMDB))
+        new_sample_object = SampleModel.objects.create(movie = movie,IMDB = IMDB)
+        new_sample_object.save()
         return HttpResponse('hey')    
     
 
