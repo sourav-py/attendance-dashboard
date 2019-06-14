@@ -155,7 +155,7 @@ def Attendance_Csv_Upload(request):
 
 reciever_list = []
 @api_view(['GET','POST'])
-def SampleModelListAPI(request):
+def SampleModelEndpoint(request):
 
     if request.method == 'GET':
         sample = reciever_list[1]

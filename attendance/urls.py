@@ -10,8 +10,8 @@ urlpatterns = [
     #path('upload/csv/',views.simple_upload,name = 'simple_upload'),
     path('upload/csv/students/',views.Student_Csv_Upload),
     path('upload/csv/attendance/',views.Attendance_Csv_Upload),
-    path('post/samplemodel/',views.SampleModelList),
-    path('api-view/samplemodel/',views.SampleModelListAPI),
+    
+    path('api-view/samplemodel/',views.SampleModelEndpoint),
  
 
 ]
