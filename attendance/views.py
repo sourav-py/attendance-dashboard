@@ -77,6 +77,7 @@ def base(request):
 @login_required
 @user_passes_test(is_staff)
 def StudentList(request):
+    request.session['posted_page_visited'] = True
     students= Student.objects.all()
     attendances = Attendance.objects.all()
     return render(request,'StudentList.html',{'students':students,'attendances':attendances})
@@ -100,7 +101,7 @@ def StudentAttendance(request,pk):
     else:
         return HttpResponse('You can\'t access this')
 
-@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+
 def login_student(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -122,6 +123,9 @@ def login_student(request):
 
 
 def login_teacher(request):
+    if request.session.get('posted_page_visited'):
+        del request.session['posted_page_visited']
+        return http.HttpResponseRedirect("/students/")
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
@@ -188,7 +192,6 @@ def Student_Csv_Upload(request):
             password = i[1]
             first_name = i[2]
             last_name = i[3]
-            #check if it is already present in db
             initial_users = CustomUser.objects.all()
             for user in initial_users:
                 initial_users_list.append(str(user.username))
@@ -251,7 +254,27 @@ def SampleModelEndpoint(request):
         reciever_list.append(str(IMDB))
         new_sample_object = SampleModel.objects.create(movie = movie,IMDB = IMDB)
         new_sample_object.save()
-        return HttpResponse('Your model is saved!')    
+        return HttpResponse('Your model is saved!')   
+
+@api_view(['GET','POST'])
+def StudentModelEndpoint(request):
+    initial_users_list = []
+    if request.method == 'POST':
+        username = request.data['username']
+        password = request.data['password']
+        first_name = request.data['first_name']
+        last_name = request.data['last_name']
+        initial_users = CustomUser.objects.all()
+        for user in initial_users:
+            initial_users_list.append(str(user.username))
+        if username not in initial_users_list:    
+            new_user_object = CustomUser.objects.create_user(username = username,password=password,first_name = first_name,last_name = last_name,is_student = True)
+            new_user_object = authenticate(username=username,password=password)
+            new_user_object.save()
+            student_object = Student.objects.create(user = new_user_object,name=str(str(first_name)+" "+str(last_name)))
+            student_object.save()
+       
+
     
 
 
