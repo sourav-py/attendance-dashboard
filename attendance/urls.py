@@ -6,9 +6,9 @@ urlpatterns = [
     #--------------general urls ------------------------------
     path('',views.base,name = 'base'),
     path('students/',views.StudentList,name = 'StudentList'), 
-    url(r'^student-attendance/(?P<pk>[0-50]+)/$', views.StudentAttendance,name = 'StudentAttendance'),
+    url(r'^student-attendance/(?P<pk>[0-9]+)/$', views.StudentAttendance,name = 'StudentAttendance'),
 
-    
+
     #--------------csvupload--------------------------------
     path('upload/csv/students/',views.Student_Csv_Upload),
     path('upload/csv/attendance/',views.Attendance_Csv_Upload),
