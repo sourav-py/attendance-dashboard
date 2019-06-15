@@ -125,7 +125,7 @@ def login_student(request):
 def login_teacher(request):
     if request.session.get('posted_page_visited'):
         del request.session['posted_page_visited']
-        return http.HttpResponseRedirect("/students/")
+        return HttpResponseRedirect("/students/")
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
