@@ -70,8 +70,6 @@ def out_of_attendance(id):
 
 
 def base(request):
-    if request.user is not None:
-        return HttpResponseRedirect('/students/')
     return render(request,'base.html',{'request':request})
 
 
@@ -79,7 +77,6 @@ def base(request):
 @login_required
 @user_passes_test(is_staff)
 def StudentList(request):
-    request.session['posted_page_visited'] = True
     students= Student.objects.all()
     attendances = Attendance.objects.all()
     return render(request,'StudentList.html',{'students':students,'attendances':attendances})
@@ -125,9 +122,6 @@ def login_student(request):
 
 
 def login_teacher(request):
-    if request.session.get('posted_page_visited'):
-        del request.session['posted_page_visited']
-        return HttpResponseRedirect("/students/")
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
