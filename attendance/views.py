@@ -70,6 +70,8 @@ def out_of_attendance(id):
 
 
 def base(request):
+    if request.user is not None:
+        return HttpResponseRedirect('/students/')
     return render(request,'base.html',{'request':request})
 
 
