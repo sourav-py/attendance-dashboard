@@ -1,6 +1,6 @@
 <html>
     <head>
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <style>
              
             .week 
@@ -16,7 +16,7 @@
         <p><h2>Name : {{student.name}}</h3></p>
         <P>Total attendance : {{attendance_variable}}/{{out_of_attendance_variable}}</P>
         <p>Attendance Percentage: {{attendance_percentage}}%</p>
-        <p>WARNING : {{message}}</p>
+        <p>{{message}}</p>
         {% for attendance in attendances %}
             <div class="week">
             <p><h3>Attendance for week starting from {{attendance.starting_date}}</h3></p>

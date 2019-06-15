@@ -16,7 +16,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 from attendance.serializers import SampleModelSerializer
-from django.views.decorators.cache import never_cache
+from django.views.decorators.cache import never_cache,cache_control
 
 def is_staff(user):
     object = CustomUser.objects.get(id = user.id)
@@ -32,7 +32,6 @@ def count_attendance(id):
     count = 0
     student_object = Student.objects.get(id = id)
     attendances = Attendance.objects.filter(user = student_object)
-    print(attendances[0])
     for attendance in attendances:
         if attendance.monday == 'Present':
             count += 1
@@ -89,14 +88,19 @@ def StudentAttendance(request,pk):
     if request.user.is_teacher == True or request.user == student.user:
         attendance_variable = count_attendance(pk)
         out_of_attendance_variable = out_of_attendance(pk)
-        attendance_percentage = (attendance_variable/out_of_attendance_variable)*100
-        if attendance_percentage < 75:
-            message = "your attendance is below 75%, you are expected to have more than 75% to sit in exams!!!"
+        if out_of_attendance_variable == 0:
+            attendance_percentage = 0
+        else:
+            attendance_percentage = (attendance_variable/out_of_attendance_variable)*100
+        if attendance_percentage < 75 and out_of_attendance_variable != 0:
+            message = "WARNING : your attendance is below 75%, you are expected to have more than 75% to sit in exams!!!"
+        else:
+            message = ""
         return render(request,'StudentAttendance.html',{'student':student,'attendances':attendances,'attendance_variable':attendance_variable,'out_of_attendance_variable':out_of_attendance_variable,'attendance_percentage':attendance_percentage,'message':message})
     else:
         return HttpResponse('You can\'t access this')
 
-
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def login_student(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -109,10 +113,13 @@ def login_student(request):
                 return HttpResponseRedirect('/student-attendance/%s'%(student_object_id))
                 
         else:
+            whose_login = "student login page"
             message = "please enter correct credentials(it must be of student)"
-            return render(request,'registration/studentlogin.html',{'request':request,'message':message})
+            return render(request,'registration/login.html',{'request':request,'message':message,'whose_login':whose_login})
     else:
-        return render(request,'registration/studentlogin.html',{'request':request})
+        whose_login = "student login page"
+        return render(request,'registration/login.html',{'request':request,'whose_login':whose_login})
+
 
 def login_teacher(request):
     if request.method == 'POST':
@@ -124,10 +131,12 @@ def login_teacher(request):
                 login(request, user)
                 return HttpResponseRedirect('/students/')
         else:
+            whose_login = "teacher login page"
             message = "please enter correct credentials(it must be of teacher)"
-            return render(request,'registration/teacherlogin.html',{'request':request,'message':message})
+            return render(request,'registration/login.html',{'request':request,'message':message,'whose_login':whose_login})
     else:
-        return render(request,'registration/teacherlogin.html',{'request':request})
+        whose_login = "teacher login page"
+        return render(request,'registration/login.html',{'request':request,'whose_login':whose_login})
         
 
 class StudentSignUpView(CreateView):
