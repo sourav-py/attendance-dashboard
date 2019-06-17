@@ -34,7 +34,7 @@ for i in range(0,len(data['id'])):
     data = {
         'username':username,
         'attendance':attendance,
-        'day': 'day17',
+        'day': 'day'+ str(date),
         'month':str(month),
     }
     print(data)
