@@ -388,7 +388,7 @@ def AttendanceModelEndPoint(request):
         sample3 = str(month) + str(username)
         if sample3 not in initial_attendance_list:
             new_attendance_object = Attendance.objects.create(month = month)
-            new_attendance_object.user.add(Student.objects.get(user=CustomUser.objects.filter(username = username)))
+            new_attendance_object.user.add(Student.objects.get(user=CustomUser.objects.get(username = username)))
             if day == 'day1':
                 new_attendance_object.day1 = str(attendance)
             if day == 'day2':
