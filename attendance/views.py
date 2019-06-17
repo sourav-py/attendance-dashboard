@@ -271,14 +271,21 @@ def StudentModelEndpoint(request):
             student_object.save()
 
 def SampleModelFileEndPoint(request):
+    temp_list = []
     if request.method == 'POST':
+        temp_list.append('post')
         files = request.data['files']
         data = pd.read_csv(files)
         for i in data.values:
+            temp_list.append('in data.values')
             moview = i[0]
             IMDB = i[1]
             new_sample_object = SampleModel.objects.create(movie = movie,IMDB = IMDB)
             new_sample_object.save()
+    else:
+        sample = str(temp_list[0]) + str(temp_list[1])
+        return HttpResponse('sample')
+
 
            
 
