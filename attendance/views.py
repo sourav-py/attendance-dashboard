@@ -378,11 +378,11 @@ def AttendanceModelEndPoint(request):
         
         initial_attendance_objects = Attendance.objects.all()
         for i in initial_attendance_objects:
-            """
+            
             sample = ""
             for j in i.user.all():
                 sample += str(j.user.username)
-            """
+            
             sample2 = str(i.month) + str(i.user.user.username)
             initial_attendance_list.append(sample2)
         sample3 = str(month) + str(username)
