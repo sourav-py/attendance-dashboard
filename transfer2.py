@@ -2,7 +2,7 @@
 import requests 
 
 # defining the api-endpoint 
-API_ENDPOINT = "http://sourav2k.pythonanywhere.com/api-view/studentmodel/"
+API_ENDPOINT = "http://sourav2k.pythonanywhere.com/api-view/studentmodelfile/"
 
 
 files = {'file': open('/home/sourav/Documents/SampleModel_0.csv', 'r')}
@@ -13,6 +13,6 @@ files = {'file': open('/home/sourav/Documents/SampleModel_0.csv', 'r')}
 
 
 # sending post request and saving response as response object 
-r = requests.post(url = API_ENDPOINT, files  = files) 
+r = requests.post(url = API_ENDPOINT, data  = files) 
 print(r)
 
