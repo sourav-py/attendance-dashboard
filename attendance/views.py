@@ -388,6 +388,9 @@ def AttendanceModelEndPoint(request):
             new_attendance_object = Attendance.objects.create(month = month)
             new_attendance_object.user.add(Student.objects.get(user=CustomUser.objects.get(username = username)))
             new_attendance_object.save()
+        else:
+            update_attendance_object = Attendance.objects.get(user = CustomUser.objects.get(username = username),month = month)
+            update_attendance_object.day = attendance
         return HttpResponse('post request process done......cheese!')
         
     if request.method == 'GET':
