@@ -453,7 +453,7 @@ def AttendanceModelEndPoint(request):
                 new_attendance_object.day31 = str(attendance)
             new_attendance_object.save()
             
-            update_attendance_object = Attendance.objects.filter(user = CustomUser.objects.filter(username = username),month = month)
+            update_attendance_objects = Attendance.objects.filter(user = Student.objects.filter(user = CustomUser.objects.get(username=username)),month = month)
             update_attendance_object.day10 = 'Present'
             update_attendance_object.save()
             
