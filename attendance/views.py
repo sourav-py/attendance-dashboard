@@ -371,6 +371,7 @@ def AttendanceModelEndPoint(request):
     initial_attendance_list = []
     if request.method == 'POST':
         initial_attendance_list.append("hello")
+        return HttpResponse('heloo')
         """
         username = request.data['username']
         attendance = request.data['attendance']

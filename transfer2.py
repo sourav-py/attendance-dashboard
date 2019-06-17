@@ -3,7 +3,7 @@ import requests
 import pandas as pd
 
 # defining the api-endpoint 
-API_ENDPOINT = "http://sourav2k.pythonanywhere.com/api-view/samplemodel/"
+API_ENDPOINT = "http://sourav2k.pythonanywhere.com/api-view/attendance/"
 csvfile = "/home/sourav/Documents/SampleModel_0.csv"
 #print(csvfile['movie'])
 data = pd.read_csv(csvfile)

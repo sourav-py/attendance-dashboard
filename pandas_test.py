@@ -6,8 +6,9 @@ datetime_var = datetime.now()
 date = datetime_var.day
 month = datetime_var.month
 
-API_ENDPOINT = "http://sourav2k.pythonanywhere.com/api-view/attendance/"
+API_ENDPOINT = "http://sourav2k.pythonanywhere.com/api-view/samplemodel/"
 csvfile = "/home/sourav/Documents/attendance_1.csv"
+"""
 data = pd.read_csv(csvfile)
 
 username_list = []
@@ -32,15 +33,21 @@ for i in range(0,len(data['id'])):
     else:
         attendance = attendance_temp
     data = {
-        'username':username,
-        'attendance':attendance,
-        'day': 'day' + str(date),
-        'month':str(month),
+        'username':'username',
+        'attendance':'attendance',
+        'day': 'day' ,
+        'month':'month',
     }
     print(data)
     r = requests.post(url = API_ENDPOINT,data = data)
     print(r)
-    
-       
+ """
+
+data = {
+     'movie': 'movie',
+     'IMDB' : 'IMDB',
+}
+r = requests.post(url = API_ENDPOINT,data=data)   
+print(r)       
     
     
