@@ -33,17 +33,67 @@ def count_attendance(id):
     student_object = Student.objects.get(id = id)
     attendances = Attendance.objects.filter(user = student_object)
     for attendance in attendances:
-        if attendance.monday == 'Present':
+        if attendance.day1 == 'Present':
             count += 1
-        if attendance.tuesday == 'Present':
+        if attendance.day2 == 'Present':
             count += 1
-        if attendance.wednesday == 'Present':
+        if attendance.day3 == 'Present':
             count += 1
-        if attendance.thursday == 'Present':
+        if attendance.day4 == 'Present':
             count +=1
-        if attendance.friday == 'Present':
+        if attendance.day5 == 'Present':
             count +=1
-        if attendance.saturday == 'Present':
+        if attendance.day6 == 'Present':
+            count +=1
+        if attendance.day7 == 'Present':
+            count += 1
+        if attendance.day8 == 'Present':
+            count += 1
+        if attendance.day9 == 'Present':
+            count += 1
+        if attendance.day10 == 'Present':
+            count +=1
+        if attendance.day11 == 'Present':
+            count +=1
+        if attendance.day12 == 'Present':
+            count +=1
+        if attendance.day13 == 'Present':
+            count += 1
+        if attendance.day14 == 'Present':
+            count += 1
+        if attendance.day15 == 'Present':
+            count += 1
+        if attendance.day16 == 'Present':
+            count +=1
+        if attendance.day17 == 'Present':
+            count +=1
+        if attendance.day18 == 'Present':
+            count +=1
+        if attendance.day19 == 'Present':
+            count += 1
+        if attendance.day20 == 'Present':
+            count += 1
+        if attendance.day21 == 'Present':
+            count += 1
+        if attendance.day22 == 'Present':
+            count +=1
+        if attendance.day23 == 'Present':
+            count +=1
+        if attendance.day24 == 'Present':
+            count +=1
+        if attendance.day25 == 'Present':
+            count += 1
+        if attendance.day26 == 'Present':
+            count += 1
+        if attendance.day27 == 'Present':
+            count += 1
+        if attendance.day28 == 'Present':
+            count +=1
+        if attendance.day29 == 'Present':
+            count +=1
+        if attendance.day30 == 'Present':
+            count +=1
+        if attendance.day31 == 'Present':
             count +=1
     return count
 
@@ -53,17 +103,67 @@ def out_of_attendance(id):
     student_object = Student.objects.get(id = id)
     attendances = Attendance.objects.filter(user = student_object)
     for attendance in attendances:
-        if attendance.monday == 'Present' or attendance.monday == 'Absent':
+        if attendance.day1 == 'Present' or attendance.day1 == 'Absent':
             count += 1
-        if attendance.tuesday == 'Present' or attendance.tuesday == 'Absent':
+        if attendance.day2 == 'Present' or attendance.day2 == 'Absent':
             count += 1
-        if attendance.wednesday == 'Present' or attendance.wednesday == 'Absent':
+        if attendance.day3 == 'Present' or attendance.day3 == 'Absent':
             count += 1
-        if attendance.thursday == 'Present' or attendance.thursday == 'Absent':
+        if attendance.day4 == 'Present' or attendance.day4 == 'Absent':
             count +=1
-        if attendance.friday == 'Present' or attendance.friday == 'Absent':
+        if attendance.day5 == 'Present' or attendance.day5 == 'Absent':
             count +=1
-        if attendance.saturday == 'Present' or attendance.saturday == 'Absent':
+        if attendance.day6 == 'Present' or attendance.day6 == 'Absent':
+            count +=1
+        if attendance.day7 == 'Present' or attendance.day7 == 'Absent':
+            count += 1
+        if attendance.day8 == 'Present' or attendance.day8 == 'Absent':
+            count += 1
+        if attendance.day9 == 'Present' or attendance.day9 == 'Absent':
+            count += 1
+        if attendance.day10 == 'Present' or attendance.day10 == 'Absent':
+            count +=1
+        if attendance.day11 == 'Present' or attendance.day11 == 'Absent':
+            count +=1
+        if attendance.day12 == 'Present' or attendance.day12 == 'Absent':
+            count +=1
+        if attendance.day13 == 'Present' or attendance.day13 == 'Absent':
+            count += 1
+        if attendance.day14 == 'Present' or attendance.day14 == 'Absent':
+            count += 1
+        if attendance.day15 == 'Present' or attendance.day15 == 'Absent':
+            count += 1
+        if attendance.day16 == 'Present' or attendance.day16 == 'Absent':
+            count +=1
+        if attendance.day17 == 'Present' or attendance.day17 == 'Absent':
+            count +=1
+        if attendance.day18 == 'Present' or attendance.day18 == 'Absent':
+            count +=1
+        if attendance.day19 == 'Present' or attendance.day19 == 'Absent':
+            count += 1
+        if attendance.day20 == 'Present' or attendance.day20 == 'Absent':
+            count += 1
+        if attendance.day21 == 'Present' or attendance.day21 == 'Absent':
+            count += 1
+        if attendance.day22 == 'Present' or attendance.day22 == 'Absent':
+            count +=1
+        if attendance.day23 == 'Present' or attendance.day23 == 'Absent':
+            count +=1
+        if attendance.day24 == 'Present' or attendance.day24 == 'Absent':
+            count +=1
+        if attendance.day25 == 'Present' or attendance.day25 == 'Absent':
+            count += 1
+        if attendance.day26 == 'Present' or attendance.day26 == 'Absent':
+            count += 1
+        if attendance.day27 == 'Present' or attendance.day27 == 'Absent':
+            count += 1
+        if attendance.day28 == 'Present' or attendance.day28 == 'Absent':
+            count +=1
+        if attendance.day29 == 'Present' or attendance.day29 == 'Absent':
+            count +=1
+        if attendance.day30 == 'Present' or attendance.day30 == 'Absent':
+            count +=1
+        if attendance.day31 == 'Present' or attendance.day31 == 'Absent':
             count +=1
     return count
 
@@ -233,24 +333,20 @@ def Attendance_Csv_Upload(request):
 
 #----------------------API views-------------------------------
 
-reciever_list = []
+
 @api_view(['GET','POST'])
 def SampleModelEndpoint(request):
-
-    if request.method == 'GET':
-        n = len(reciever_list)
-        sample = reciever_list[n-1]
-        sample2 = reciever_list[n-2]
-        response = str(sample) + str(sample2)
-        return HttpResponse(response)
+    initial_movies_list = []
     if request.method == 'POST':
         movie = request.data['movie']
         IMDB = request.data['IMDB']
-        reciever_list.append(str(movie))
-        reciever_list.append(str(IMDB))
-        new_sample_object = SampleModel.objects.create(movie = movie,IMDB = IMDB)
-        new_sample_object.save()
-        return HttpResponse('Your model is saved!')   
+        initial_movies = SampleModel.objects.all()
+        for movie in initial_movies:
+            initial_movies_list.append(movie.movie)
+        if movie not in initial_movies_list:
+            new_sample_object = SampleModel.objects.create(movie = movie,IMDB = IMDB)
+            new_sample_object.save()
+            return HttpResponse('Your model is saved!')   
 
 @api_view(['GET','POST'])
 def StudentModelEndpoint(request):
@@ -269,6 +365,12 @@ def StudentModelEndpoint(request):
             new_user_object.save()
             student_object = Student.objects.create(user = new_user_object,name=str(str(first_name)+" "+str(last_name)))
             student_object.save()
+
+
+def AttendanceModelEndpoint(request):
+    initial_attendance_list = []
+    if request.method == 'POST':
+         
 
 
 
