@@ -375,7 +375,7 @@ def AttendanceModelEndPoint(request):
         attendance = request.data['attendance']
         month = request.data['month']
         day = request.data['day']
-
+        """
         initial_attendance_objects = Attendance.objects.all()
         for i in initial_attendance_objects:
             sample = str(i.month) + str(i.user.username)
@@ -385,8 +385,10 @@ def AttendanceModelEndPoint(request):
             new_attendance_object = Attendance.objects.create(month = month)
             new_attendance_object.user.add(Student.objects.get(user=CustomUser.objects.get(username = username)))
             new_attendance_object.save()
+        """
     if request.method == 'GET':
         sample = str(initial_attendance_list[0])
+        return HttpResponse(sample)
 
 
 
