@@ -383,7 +383,7 @@ def AttendanceModelEndPoint(request):
             for j in i.user.all():
                 sample += str(j.user.username)
             
-            sample2 = str(i.month) + str(i.user.user.username)
+            sample2 = str(i.month) + str(sample)
             initial_attendance_list.append(sample2)
         sample3 = str(month) + str(username)
         if sample3 not in initial_attendance_list:
