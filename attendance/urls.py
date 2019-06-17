@@ -17,7 +17,7 @@ urlpatterns = [
     #--------------endpoints-----------------------------
     path('api-view/samplemodel/',views.SampleModelEndpoint),
     path('api-view/studentmodel/',views.StudentModelEndpoint),
-    path('api-view/samplemodelfile/',views.SampleModelFileEndPoint),
+    
 
 
     #-------------accounts-----------------------------------
