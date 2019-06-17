@@ -378,10 +378,13 @@ def AttendanceModelEndPoint(request):
         
         initial_attendance_objects = Attendance.objects.all()
         for i in initial_attendance_objects:
-            sample = str(i.month) + str(i.user.username)
-            initial_attendance_list.append(sample)
-        sample2 = str(month) + str(username)
-        if sample2 not in initial_attendance_list:
+            sample = ""
+            for j in i.user.all():
+                sample += str(j.user.username)
+            sample2 = str(i.month) + str(sample)
+            initial_attendance_list.append(sample2)
+        sample3 = str(month) + str(username)
+        if sample3 not in initial_attendance_list:
             new_attendance_object = Attendance.objects.create(month = month)
             new_attendance_object.user.add(Student.objects.get(user=CustomUser.objects.get(username = username)))
             new_attendance_object.save()
@@ -390,6 +393,7 @@ def AttendanceModelEndPoint(request):
     if request.method == 'GET':
         sample = str(initial_attendance_list[0])
         return HttpResponse(sample)
+
 
 
 

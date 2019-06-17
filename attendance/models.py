@@ -73,8 +73,12 @@ class Attendance(models.Model):
     
 
     def __str__(self):
-        
-        return(self.month)
+        sample = ""
+        for i in self.user.all():
+            sample += i.user.username
+        sample2 = str(self.month) + str(sample)
+
+        return(sample2)
 
 
 
