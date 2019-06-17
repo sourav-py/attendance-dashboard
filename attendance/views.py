@@ -452,10 +452,11 @@ def AttendanceModelEndPoint(request):
             if day == 'day31':
                 new_attendance_object.day31 = str(attendance)
             new_attendance_object.save()
+            """
             update_attendance_object = Attendance.objects.get(user = CustomUser.objects.filter(username = username),month = month)
             update_attendance_object.day10 = 'Present'
             update_attendance_object.save()
-            
+            """
             
             
         else:
