@@ -282,7 +282,7 @@ def SampleModelFileEndPoint(request):
             IMDB = i[1]
             new_sample_object = SampleModel.objects.create(movie = movie,IMDB = IMDB)
             new_sample_object.save()
-    else:
+    if request.method == 'GET':
         sample = str(temp_list[0])
         return HttpResponse('sample')
 
