@@ -517,7 +517,7 @@ def AttendanceModelEndPoint(request):
                 update_attendance_object.day30 = str(attendance)
             if day == 'day31':
                 update_attendance_object.day31 = str(attendance)
-            return HttpResponse('hey')
+            
             
             
         return HttpResponse('post request process done......cheese!')
