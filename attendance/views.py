@@ -384,6 +384,8 @@ def AttendanceModelEndPoint(request):
             new_attendance_object = Attendance.objects.create(month = month)
             new_attendance_object.user.add(Student.objects.get(user=CustomUser.objects.get(username = username)))
             new_attendance_object.save()
+    if request.method == 'GET':
+        sample = str(initial_attendance_list[0])
 
 
 
