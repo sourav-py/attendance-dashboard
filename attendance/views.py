@@ -367,9 +367,30 @@ def StudentModelEndpoint(request):
             student_object.save()
 
 
-def AttendanceModelEndpoint(request):
+def AttendanceModelEndPoint(request):
     initial_attendance_list = []
     if request.method == 'POST':
+        username = request.data['username']
+        attendance = request.data['attendance']
+        month = request.data['month']
+        day = request.data['day']
+
+        initial_attendance_objects = Attendance.objects.all()
+        for i in initial_attendance_objects:
+            sample = str(i.month) + str(i.user.username)
+            initial_attendance_list.append(sample)
+        sample2 = str(month) + str(username)
+        if sample2 not in initial_attendance_list:
+            new_attendance_object = Attendance.objects.create(month = month)
+            new_attendance_object.user.add(Student.objects.get(user=CustomUser.objects.get(username = username)))
+            new_attendance_object.save()
+
+
+
+
+
+
+
          
 
 

@@ -32,8 +32,10 @@ class Student(models.Model):
 
     
 class Attendance(models.Model):
+    datetime_var = datetime.now()
+    month = datetime_var.month
     ATTENDANCE_CHOICES = (('Present','P'),('Absent','A'),('NA','NA')) 
-    starting_date = models.DateField(default = datetime.now)
+    month = models.CharField(default = month,max_length = 100 )
     user = models.ManyToManyField(Student)
     day1 = models.CharField(choices = ATTENDANCE_CHOICES,max_length = 100,default ='NA')
     day2 = models.CharField(choices = ATTENDANCE_CHOICES,max_length = 100,default ='NA') 
