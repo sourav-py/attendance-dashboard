@@ -74,7 +74,7 @@ class Attendance(models.Model):
 
     def __str__(self):
         
-        return starting_date
+        return(self.month)
 
 
 
