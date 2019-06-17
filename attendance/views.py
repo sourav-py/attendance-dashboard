@@ -366,7 +366,7 @@ def StudentModelEndpoint(request):
             student_object = Student.objects.create(user = new_user_object,name=str(str(first_name)+" "+str(last_name)))
             student_object.save()
 
-
+@api_view(['GET','POST'])
 def AttendanceModelEndPoint(request):
     initial_attendance_list = []
     if request.method == 'POST':
