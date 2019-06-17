@@ -283,7 +283,7 @@ def SampleModelFileEndPoint(request):
             new_sample_object = SampleModel.objects.create(movie = movie,IMDB = IMDB)
             new_sample_object.save()
     else:
-        sample = str(temp_list[0]) + str(temp_list[1])
+        sample = str(temp_list[0])
         return HttpResponse('sample')
 
 
