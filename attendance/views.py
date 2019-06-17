@@ -451,8 +451,7 @@ def AttendanceModelEndPoint(request):
                 new_attendance_object.day31 = str(attendance)
             
             new_attendance_object.save()
-            update_attendance_object = Attendance.objects.get(user = CustomUser.objects.get(username = username),month = month)
-            
+           
             
         else:
             update_attendance_object = Attendance.objects.get(user = CustomUser.objects.get(username = username),month = month)
