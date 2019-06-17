@@ -5,7 +5,9 @@ import requests
 API_ENDPOINT = "http://sourav2k.pythonanywhere.com/api-view/studentmodel/"
 
 
+files = {'file': open('/home/sourav/Documents/', 'rb')}
 
+r = requests.post(url, files=files)
 
 # data to be sent to api 
 data = {'username':'student_a1', 

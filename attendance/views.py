@@ -269,7 +269,18 @@ def StudentModelEndpoint(request):
             new_user_object.save()
             student_object = Student.objects.create(user = new_user_object,name=str(str(first_name)+" "+str(last_name)))
             student_object.save()
-       
+
+def SampleModelFileEndPoint(request):
+    if request.method == 'POST':
+        files = request.data['files']
+        data = pd.read_csv(files)
+        for i in data.values:
+            moview = i[0]
+            IMDB = i[1]
+            new_sample_object = SampleModel.objects.create(movie = movie,IMDB = IMDB)
+            new_sample_object.save()
+
+           
 
     
 
