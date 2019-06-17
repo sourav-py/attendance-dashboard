@@ -371,11 +371,12 @@ def AttendanceModelEndPoint(request):
     initial_attendance_list = []
     if request.method == 'POST':
         initial_attendance_list.append("hello")
+        """
         username = request.data['username']
         attendance = request.data['attendance']
         month = request.data['month']
         day = request.data['day']
-        """
+        
         initial_attendance_objects = Attendance.objects.all()
         for i in initial_attendance_objects:
             sample = str(i.month) + str(i.user.username)
