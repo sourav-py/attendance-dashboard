@@ -370,8 +370,7 @@ initial_attendance_list = []
 def AttendanceModelEndPoint(request):
     if request.method == 'POST':
         initial_attendance_list.append("hello")
-        return HttpResponse('heloo')
-        """
+        
         username = request.data['username']
         attendance = request.data['attendance']
         month = request.data['month']
@@ -386,7 +385,8 @@ def AttendanceModelEndPoint(request):
             new_attendance_object = Attendance.objects.create(month = month)
             new_attendance_object.user.add(Student.objects.get(user=CustomUser.objects.get(username = username)))
             new_attendance_object.save()
-        """
+        return HttpResponse('post request process done......cheese!')
+        
     if request.method == 'GET':
         sample = str(initial_attendance_list[0])
         return HttpResponse(sample)
