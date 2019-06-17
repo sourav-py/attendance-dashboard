@@ -36,7 +36,7 @@ class Attendance(models.Model):
     month = datetime_var.month
     ATTENDANCE_CHOICES = (('Present','P'),('Absent','A'),('NA','NA')) 
     month = models.CharField(default = month,max_length = 100 )
-    user = models.ForeignKey(Student,on_delete = models.CASCADE,related_name='user_student_attendance')
+    user = models.ManyToManyField(Student)
     day1 = models.CharField(choices = ATTENDANCE_CHOICES,max_length = 100,default ='NA')
     day2 = models.CharField(choices = ATTENDANCE_CHOICES,max_length = 100,default ='NA') 
     day3 = models.CharField(choices = ATTENDANCE_CHOICES,max_length = 100,default ='NA')
@@ -73,13 +73,12 @@ class Attendance(models.Model):
     
 
     def __str__(self):
-        """
         sample = ""
         for i in self.user.all():
             sample += i.user.username
         sample2 = str(self.month) + str(sample)
-        """
-        return(str(self.month)+str(self.user.user.username))
+
+        return(sample2)
 
 
 

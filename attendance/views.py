@@ -378,13 +378,12 @@ def AttendanceModelEndPoint(request):
         
         initial_attendance_objects = Attendance.objects.all()
         for i in initial_attendance_objects:
-            """
+            
             sample = ""
             for j in i.user.all():
                 sample += str(j.user.username)
-            """    
-            sample2 = str(i.month) + str(i.user.user.username)
-        
+            
+            sample2 = str(i.month) + str(sample)
             initial_attendance_list.append(sample2)
         sample3 = str(month) + str(username)
         if sample3 not in initial_attendance_list:
@@ -454,7 +453,7 @@ def AttendanceModelEndPoint(request):
                 new_attendance_object.day31 = str(attendance)
             new_attendance_object.save()
             
-            update_attendance_objects = Attendance.objects.get(user = Student.objects.filter(user = CustomUser.objects.get(username=username)),month = month)
+            update_attendance_object = Attendance.objects.get(user = Student.objects.filter(user = CustomUser.objects.get(username=username)),month = month)
             update_attendance_object.day10 = 'Present'
             update_attendance_object.save()
             
