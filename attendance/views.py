@@ -274,7 +274,7 @@ def SampleModelFileEndPoint(request):
     temp_list = []
     if request.method == 'POST':
         temp_list.append('post')
-        files = request.data['file']
+        files = request.data['files']
         data = pd.read_csv(files)
         for i in data.values:
             temp_list.append('in data.values')
