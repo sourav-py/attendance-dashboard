@@ -380,6 +380,7 @@ initial_attendance_list = []
 @api_view(['GET','POST'])
 def AttendanceModelEndPoint(request):
     if request.method == 'POST':
+        initial_attendance_list = []
         
         
         username = request.data['username']
