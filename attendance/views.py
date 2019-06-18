@@ -171,14 +171,15 @@ def out_of_attendance(id):
 
 def base(request):
     username = 'student_c1'
+    sample = ""
     for i in Attendance.objects.all():
-        sample = ""
-        for j in i.user.all():
-                sample += str(j.user.username)
-        if sample == username:
-            model = i
         
-            
+        for j in i.user.all():
+            sample += str(j.user.username)
+            if sample == username and i.month == "6":
+                model =i
+                model.day11 = 'Present'
+                model.save()
 
     return render(request,'base.html',{'request':request,'model':model})
 
@@ -471,14 +472,17 @@ def AttendanceModelEndPoint(request):
                 if sample == username:
                     model =i
                     model.day10 = 'Present'
+                    model.save()
 
             
-           
-            
-            
-            
+                
         else:
-            update_attendance_object = Attendance.objects.get(user = CustomUser.objects.get(username = username),month = month)
+            sample = ""
+            for i in Attendance.objects.all():
+                for j in i.user.all():
+                    sample += str(j.user.username)
+                if sample == username and i.month == month:
+                    update_attendance_object = i
             if day == 'day1':
                 update_attendance_object.day1 = str(attendance)
             if day == 'day2':
@@ -541,6 +545,7 @@ def AttendanceModelEndPoint(request):
                 update_attendance_object.day30 = str(attendance)
             if day == 'day31':
                 update_attendance_object.day31 = str(attendance)
+            update_attendance_object.save()
             
             
             
