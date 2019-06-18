@@ -463,6 +463,7 @@ def AttendanceModelEndPoint(request):
             if day == 'day31':
                 new_attendance_object.day31 = str(attendance)
             new_attendance_object.save()
+            return HttpResponse('done')
             
             
                 

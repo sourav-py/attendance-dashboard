@@ -15,7 +15,7 @@ attendance_list = []
 
 for i in data['id']:
     username_list.append(str(i))
-for i in data['19']:
+for i in data[str(date)]:
     attendance_list.append(str(i))
 
 k = 0
@@ -34,7 +34,7 @@ for i in range(0,len(data['id'])):
     data = {
         'username':username,
         'attendance':attendance,
-        'day': 'day19',
+        'day': 'day' + str(date),
         'month':str(month),
     }
     print(data)
