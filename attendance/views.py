@@ -295,10 +295,10 @@ def Student_Csv_Upload(request):
         csvfile = request.FILES['myfile']
         data = pd.read_csv(csvfile)
         for i in data.values:
-            username = i[0]
-            password = i[1]
-            first_name = i[2]
-            last_name = i[3]
+            username = request.data['username']
+            password = request.data['password']
+            first_name = request.data['first_name']
+            last_name = request.data['last_name']
             initial_users = CustomUser.objects.all()
             for user in initial_users:
                 initial_users_list.append(str(user.username))

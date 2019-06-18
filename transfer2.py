@@ -3,21 +3,22 @@ import requests
 import pandas as pd
 
 # defining the api-endpoint 
-API_ENDPOINT = "http://sourav2k.pythonanywhere.com/api-view/attendance/"
-csvfile = "/home/sourav/Documents/SampleModel_0.csv"
-#print(csvfile['movie'])
-data = pd.read_csv(csvfile)
-for i in data.values:
-	id = i[0]
-	print(id)
-	movie = i[1]
-	print(movie)
-	imdb = i[2]
-	print(imdb)
-	data = {
-		'movie':movie,
-		'IMDB':imdb,
-	}
-	r = requests.post(url = API_ENDPOINT , data= data)
-	print(r)
+API_ENDPOINT = "http://sourav2k.pythonanywhere.com/api-view/studentmodel/"
+csvfile = "/home/sourav/Documents/Student_0.csv"
 
+data = pd.read_csv(csvfile)
+
+for i in data.values:
+    username = i[0]
+    password = i[1]
+    first_name = i[2]
+    last_name = i[3]
+    data  = {
+		'username':username,
+		'password':password,
+		'first_name': first_name,
+		'last_name':last_name,
+	 }
+    r = requests.post(url = API_ENDPOINT,data=data)
+    print(r)
+        
