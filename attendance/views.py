@@ -378,6 +378,7 @@ def StudentModelEndpoint(request):
             student_object.save()
 
 @api_view(['GET','POST'])
+initial_attendance_list = []
 def AttendanceModelEndPoint(request):
     if request.method == 'POST':
         
@@ -463,7 +464,7 @@ def AttendanceModelEndPoint(request):
             if day == 'day31':
                 new_attendance_object.day31 = str(attendance)
             new_attendance_object.save()
-            return HttpResponse('done')
+            
             
             
                 
