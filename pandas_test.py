@@ -15,15 +15,13 @@ attendance_list = []
 
 for i in data['id']:
     username_list.append(str(i))
-for i in data['19']:
+for i in data[str(date)]:
     attendance_list.append(str(i))
 
 k = 0
 for i in range(0,len(data['id'])):
     if str(attendance_list[i]) != 'nan':
-        k = k+1
-
-print(k)
+       k = k+1
 """
 for i in range(0,len(data['id'])):
     username = username_list[i]
@@ -35,22 +33,22 @@ for i in range(0,len(data['id'])):
     data = {
         'username':username,
         'attendance':attendance,
-        'day': 'day19',
+        'day': 'day'+str(date),
         'month':str(month),
     }
     print(data)
     r = requests.post(url = API_ENDPOINT,data = data)
     print(r)
 """
-
 data = {
-    'username':'student_f1',
-    'attendance':'Absent',
-    'day':'day19',
-    'month':'6',
+    'username' : 'student_11',
+    'attendance' : 'Present',
+    'day' : 'day19',
+    'month':'6', 
+
 }
-r = requests.post(url = API_ENDPOINT,data=data)
+r = requests.post(url = API_ENDPOINT,data= data)
 print(r)
-       
+
     
     

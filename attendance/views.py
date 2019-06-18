@@ -170,15 +170,15 @@ def out_of_attendance(id):
 
 
 def base(request):
-    username = 'student_c1'
-    sample = ""
+    username = 'student_12'
     for i in Attendance.objects.all():
+        sample = ""
         
         for j in i.user.all():
             sample += str(j.user.username)
             if sample == username and i.month == "6":
                 model =i
-                model.day11 = 'Present'
+                model.day19 = 'Present'
                 model.save()
 
     return render(request,'base.html',{'request':request,'model':model})
@@ -469,8 +469,9 @@ def AttendanceModelEndPoint(request):
             
                 
         else:
-            sample = ""
+            
             for i in Attendance.objects.all():
+                sample= ""
                 for j in i.user.all():
                     sample += str(j.user.username)
                 if sample == username and i.month == month:
