@@ -376,11 +376,11 @@ def StudentModelEndpoint(request):
             new_user_object.save()
             student_object = Student.objects.create(user = new_user_object,name=str(str(first_name)+" "+str(last_name)))
             student_object.save()
-initial_attendance_list = []
+
 @api_view(['GET','POST'])
 def AttendanceModelEndPoint(request):
     if request.method == 'POST':
-        initial_attendance_list.append("hello")
+        
         
         username = request.data['username']
         attendance = request.data['attendance']
@@ -464,16 +464,6 @@ def AttendanceModelEndPoint(request):
                 new_attendance_object.day31 = str(attendance)
             new_attendance_object.save()
             
-            #trying to update attendance object
-            sample = ""
-            for i in Attendance.objects.all():
-                for j in i.user.all():
-                    sample += str(j.user.username)
-                if sample == username:
-                    model =i
-                    model.day10 = 'Present'
-                    model.save()
-
             
                 
         else:
