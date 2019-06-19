@@ -1,16 +1,16 @@
 <html>
     <head>
          <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
-<!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+        <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 
-<!-- Popper JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <!-- Popper JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 
-<!-- Latest compiled JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> 
+        <!-- Latest compiled JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> 
             <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
         <title>stuents list</title>
         <style>
@@ -23,15 +23,13 @@
                 margin-top:3%;
                 margin-left: 10%;
                 margin-right: 10%;
-            }ul {
+            }
+            ul {
                 list-style-type: none;
                 margin: 0;
                 padding: 0;
                 overflow: hidden;
                 background-color: #333;
-                width:90%;
-                margin-left:5%;
-
                 }
 
             li {
@@ -59,13 +57,12 @@
                 background: #228B22;
                 float: right;
                 border : 1px solid #32CD32;
-                line-height: 2em;
             }
-            #link
+            .link
             {
                 text-decoration: none;
                 color : white;
-                
+                line-height: 2.4em;
                 
             }
             #student-name
@@ -95,48 +92,38 @@
              color: white;
              line-height: 2.8em;
          }
-         .no-student
-         {
-             text-align: center;
-             margin-top: 20%;
-             font-size: 60;
-         }
            
             
         </style>
     </head>
     <body>
         
-            <ul>
-                <div>
-                    <li><a id = "link" href="#home">Home</a></li>
-                    <li><a id = "link" href="/upload/csv/students/">upload student csv</a></li>
-                    <li><a id = "link" href="/upload/csv/attendance/">upload attendance csv</a></li>
-                    <li><a id = "link" href="#about">About</a></li>
-
+          
                     
 
-                </div>
-                <div class="top-logout">
-                    <li id = "teacher-name">Teacher : {{request.user.first_name}} {{request.user.last_name}}</li>
-                    <li style='padding-left:15px;padding-right:15px;padding-top: 6px'><a class='btn btn-primary'href ="/auth_urls/logout/">logout</a></li>
-                    
-                </div>    
-            </ul>
+            
+                    <div class="row" style='background-color: black'>
+
+                            <div class="col-sm-2"id='teacher-name'> <a class="active" href="#home">Home</a></div>
+                                <div class="col-sm-2"id='teacher-name'> <a href="/upload/csv/students/">upload student csv</a></div>
+                                    <div class="col-sm-2"id='teacher-name'><a href="/upload/csv/attendance/">upload attendance csv</a></div>
+                                        <div class="col-sm-2"id='teacher-name'> <a href="#about">About</a></div>
+
+                        <div class="col-sm-2"> <li id = "teacher-name">Teacher : {{request.user.first_name}} {{request.user.last_name}}</li></div>
+                    <div class='col-sm-2'>
+                        <li ><a class='btn btn-primary'style="padding-left:2px"href ="/auth_urls/logout/">logout</a></li></div>
+                    </div>
+               
+        
            
         
         {% for student in students %}
             <div class = "student_detail_div">
             <P id = "student-id">ID : {{student.user}} </P>
             <p id = "student-name">Name : {{student.name}}</p>
-            <button class="view-attendance-button"><a id = "link" href = "/student-attendance/{{student.id}}/">view attendance</a></button>
+            <button class="view-attendance-button"><a class = "link" href = "/student-attendance/{{student.id}}/">view attendance</a></button>
             </div>
         {% endfor %}
-        <div class="no-student">
-        <div>
-            {{message}}
-        </div>
-        </div>
     
     </body>
 </html>

@@ -170,27 +170,21 @@ def out_of_attendance(id):
 
 
 def base(request):
-    username = 'student_12'
-    for i in Attendance.objects.all():
-        sample = ""
-        
-        for j in i.user.all():
-            sample += str(j.user.username)
-            if sample == username and i.month == "6":
-                model =i
-                model.day19 = 'Present'
-                model.save()
-
-    return render(request,'base.html',{'request':request,'model':model})
+    return render(request,'base.html',{'request':request})
 
 
 
 @login_required
 @user_passes_test(is_staff)
 def StudentList(request):
+    message = ""
     students= Student.objects.all()
+    try:
+        Student.objects.get(id=1)
+    except:
+        message += "NO STUDENTS IN DB"
     attendances = Attendance.objects.all()
-    return render(request,'StudentList.html',{'students':students,'attendances':attendances})
+    return render(request,'StudentList.html',{'students':students,'attendances':attendances,'request':request,'message':message})
 
 @login_required
 def StudentAttendance(request,pk):

@@ -19,6 +19,7 @@ for i in data.values:
 		'first_name': first_name,
 		'last_name':last_name,
 	 }
+    print(data)
     r = requests.post(url = API_ENDPOINT,data=data)
     print(r)
         
