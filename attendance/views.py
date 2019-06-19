@@ -311,8 +311,9 @@ def Student_Csv_Upload(request):
     return render(request, 'student_csv_upload.html')
 
 def Attendance_Csv_Upload(request):
-    initial_attendance_list = []
+
     if request.method == 'POST':
+        initial_attendance_list = []
         csvfile = request.FILES['myfile']
         data = pd.read_csv(csvfile)
         datetime_var = datetime.now()
@@ -333,15 +334,17 @@ def Attendance_Csv_Upload(request):
             if str(attendance_list[i]) != 'nan':
                 k = k+1
         if k!= 0:
+            
             for i in range(0,len(data['ID'])):
+                
                 username = username_list[i]
                 attendance_temp = attendance_list[i]
                 if str(attendance_temp) == 'nan':
                     attendance = 'Absent'
                 else:
                     attendance = attendance_temp
-                day = 'day20'
-                month = month
+                day = 'day' + str(date)
+                month = str(month)
 
                 initial_attendance_objects = Attendance.objects.all()
                 for i in initial_attendance_objects:
@@ -499,7 +502,7 @@ def Attendance_Csv_Upload(request):
                     
                     
                     
-                return HttpResponse('post request process done......cheese!')
+        return HttpResponse('post request process done......cheese!')
                 
 
     return render(request, 'student_csv_upload.html')
