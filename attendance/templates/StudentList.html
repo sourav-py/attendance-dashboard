@@ -11,7 +11,7 @@
 
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> 
-            
+            <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
         <title>stuents list</title>
         <style>
             .student_detail_div
@@ -95,12 +95,7 @@
              color: white;
              line-height: 2.8em;
          }
-         .no-student
-         {
-             text-align: center;
-             margin-top: 20%;
-             font-size: 60;
-         }
+       
            
             
         </style>
@@ -132,11 +127,6 @@
             <button class="view-attendance-button"><a id = "link" href = "/student-attendance/{{student.id}}/">view attendance</a></button>
             </div>
         {% endfor %}
-        <div class="no-student">
-        <div>
-            {{message}}
-        </div>
-        </div>
-    
+        
     </body>
 </html>
