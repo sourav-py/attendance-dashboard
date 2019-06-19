@@ -14,6 +14,7 @@ from django.contrib.auth import authenticate
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from datetime import datetime
 
 from attendance.serializers import SampleModelSerializer
 from django.views.decorators.cache import never_cache,cache_control
@@ -314,24 +315,192 @@ def Attendance_Csv_Upload(request):
     if request.method == 'POST':
         csvfile = request.FILES['myfile']
         data = pd.read_csv(csvfile)
-        for i in data.values:
-            starting_date = i[0]
-            username = i[1]
-            monday = i[2]
-            tuesday = i[3]
-            wednesday = i[4]
-            thursday = i[5]
-            friday = i[6]
-            saturday = i[7]
-            new_attendance_object = Attendance.objects.create(starting_date = starting_date,monday = monday,tuesday = tuesday,wednesday = wednesday,thursday=thursday,friday=friday,saturday=saturday)
-            new_attendance_object.user.add(Student.objects.get(user=CustomUser.objects.get(username = username)))
-            new_attendance_object.save()
-            
-        return HttpResponseRedirect('/students/')
-    
+        datetime_var = datetime.now()
+        date = datetime_var.day
+        month = datetime_var.month
+
+
+        username_list = []
+        attendance_list = []
+
+        for i in data['id']:
+            username_list.append(str(i))
+        for i in data[str(date)]:
+            attendance_list.append(str(i))
+
+        k = 0
+        for i in range(0,len(data['id'])):
+            if str(attendance_list[i]) != 'nan':
+                k = k+1
+        if k!= 0:
+            for i in range(0,len(data['id'])):
+                username = username_list[i]
+                attendance_temp = attendance_list[i]
+                if str(attendance_temp) == 'nan':
+                    attendance = 'Absent'
+                else:
+                    attendance = attendance_temp
+                day = 'day' + str(date)
+                month = month
+
+                initial_attendance_objects = Attendance.objects.all()
+                for i in initial_attendance_objects:
+                    
+                    sample = ""
+                    for j in i.user.all():
+                        sample += str(j.user.username)
+                    
+                    sample2 = str(i.month) + str(sample)
+                    initial_attendance_list.append(sample2)
+                sample3 = str(month) + str(username)
+                if sample3 not in initial_attendance_list:
+                    new_attendance_object = Attendance.objects.create(month = month)
+                    new_attendance_object.user.add(Student.objects.get(user=CustomUser.objects.get(username = username)))
+                    if day == 'day1':
+                        new_attendance_object.day1 = str(attendance)
+                    if day == 'day2':
+                        new_attendance_object.day2 = str(attendance)
+                    if day == 'day3':
+                        new_attendance_object.day3 = str(attendance)
+                    if day == 'day4':
+                        new_attendance_object.day4 = str(attendance)
+                    if day == 'day5':
+                        new_attendance_object.day5 = str(attendance)
+                    if day == 'day6':
+                        new_attendance_object.day6 = str(attendance)
+                    if day == 'day7':
+                        new_attendance_object.day7 = str(attendance)
+                    if day == 'day8':
+                        new_attendance_object.day8 = str(attendance)
+                    if day == 'day9':
+                        new_attendance_object.day9 = str(attendance)
+                    if day == 'day10':
+                        new_attendance_object.day10 = str(attendance)
+                    if day == 'day11':
+                        new_attendance_object.day11 = str(attendance)
+                    if day == 'day12':
+                        new_attendance_object.day12 = str(attendance)
+                    if day == 'day13':
+                        new_attendance_object.day13 = str(attendance)
+                    if day == 'day14':
+                        new_attendance_object.day14 = str(attendance)
+                    if day == 'day15':
+                        new_attendance_object.day15 = str(attendance)
+                    if day == 'day16':
+                        new_attendance_object.day16 = str(attendance)
+                    if day == 'day17':
+                        new_attendance_object.day17 = str(attendance)
+                    if day == 'day18':
+                        new_attendance_object.day18 = str(attendance)
+                    if day == 'day19':
+                        new_attendance_object.day19 = str(attendance)
+                    if day == 'day20':
+                        new_attendance_object.day20 = str(attendance)
+                    if day == 'day21':
+                        new_attendance_object.day21 = str(attendance)
+                    if day == 'day22':
+                        new_attendance_object.day22 = str(attendance)
+                    if day == 'day23':
+                        new_attendance_object.day23 = str(attendance)
+                    if day == 'day24':
+                        new_attendance_object.day24 = str(attendance)
+                    if day == 'day25':
+                        new_attendance_object.day25 = str(attendance)
+                    if day == 'day26':
+                        new_attendance_object.day26 = str(attendance)
+                    if day == 'day27':
+                        new_attendance_object.day27 = str(attendance)
+                    if day == 'day28':
+                        new_attendance_object.day28 = str(attendance)
+                    if day == 'day29':
+                        new_attendance_object.day29 = str(attendance)
+                    if day == 'day30':
+                        new_attendance_object.day30 = str(attendance)
+                    if day == 'day31':
+                        new_attendance_object.day31 = str(attendance)
+                    new_attendance_object.save()
+                    
+                    
+                    
+                        
+                else:
+                    
+                    for i in Attendance.objects.all():
+                        sample= ""
+                        for j in i.user.all():
+                            sample += str(j.user.username)
+                        if sample == username and i.month == month:
+                            update_attendance_object = i
+                    if day == 'day1':
+                        update_attendance_object.day1 = str(attendance)
+                    if day == 'day2':
+                        update_attendance_object.day2 = str(attendance)
+                    if day == 'day3':
+                        update_attendance_object.day3 = str(attendance)
+                    if day == 'day4':
+                        update_attendance_object.day4 = str(attendance)
+                    if day == 'day5':
+                        update_attendance_object.day5 = str(attendance)
+                    if day == 'day6':
+                        update_attendance_object.day6 = str(attendance)
+                    if day == 'day7':
+                        update_attendance_object.day7 = str(attendance)
+                    if day == 'day8':
+                        update_attendance_object.day8 = str(attendance)
+                    if day == 'day9':
+                        update_attendance_object.day9 = str(attendance)
+                    if day == 'day10':
+                        update_attendance_object.day10 = str(attendance)
+                    if day == 'day11':
+                        update_attendance_object.day11 = str(attendance)
+                    if day == 'day12':
+                        update_attendance_object.day12 = str(attendance)
+                    if day == 'day13':
+                        update_attendance_object.day13 = str(attendance)
+                    if day == 'day14':
+                        update_attendance_object.day14 = str(attendance)
+                    if day == 'day15':
+                        update_attendance_object.day15 = str(attendance)
+                    if day == 'day16':
+                        update_attendance_object.day16 = str(attendance)
+                    if day == 'day17':
+                        update_attendance_object.day17 = str(attendance)
+                    if day == 'day18':
+                        update_attendance_object.day18 = str(attendance)
+                    if day == 'day19':
+                        update_attendance_object.day19 = str(attendance)
+                    if day == 'day20':
+                        update_attendance_object.day20 = str(attendance)
+                    if day == 'day21':
+                        update_attendance_object.day21 = str(attendance)
+                    if day == 'day22':
+                        update_attendance_object.day22 = str(attendance)
+                    if day == 'day23':
+                        update_attendance_object.day23 = str(attendance)
+                    if day == 'day24':
+                        update_attendance_object.day24 = str(attendance)
+                    if day == 'day25':
+                        update_attendance_object.day25 = str(attendance)
+                    if day == 'day26':
+                        update_attendance_object.day26 = str(attendance)
+                    if day == 'day27':
+                        update_attendance_object.day27 = str(attendance)
+                    if day == 'day28':
+                        update_attendance_object.day28 = str(attendance)
+                    if day == 'day29':
+                        update_attendance_object.day29 = str(attendance)
+                    if day == 'day30':
+                        update_attendance_object.day30 = str(attendance)
+                    if day == 'day31':
+                        update_attendance_object.day31 = str(attendance)
+                    update_attendance_object.save()
+                    
+                    
+                    
+                return HttpResponse('post request process done......cheese!')
+                
 
     return render(request, 'student_csv_upload.html')
-
 
 
 
