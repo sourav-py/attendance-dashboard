@@ -323,24 +323,24 @@ def Attendance_Csv_Upload(request):
         username_list = []
         attendance_list = []
 
-        for i in data['id']:
+        for i in data['ID']:
             username_list.append(str(i))
         for i in data[str(date)]:
             attendance_list.append(str(i))
 
         k = 0
-        for i in range(0,len(data['id'])):
+        for i in range(0,len(data['ID'])):
             if str(attendance_list[i]) != 'nan':
                 k = k+1
         if k!= 0:
-            for i in range(0,len(data['id'])):
+            for i in range(0,len(data['ID'])):
                 username = username_list[i]
                 attendance_temp = attendance_list[i]
                 if str(attendance_temp) == 'nan':
                     attendance = 'Absent'
                 else:
                     attendance = attendance_temp
-                day = 'day' + str(date)
+                day = 'day20'
                 month = month
 
                 initial_attendance_objects = Attendance.objects.all()
