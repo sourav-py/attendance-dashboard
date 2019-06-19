@@ -1,14 +1,94 @@
 <html>
     <head>
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+            <!-- jQuery library -->
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+            
+            <!-- Popper JS -->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+            
+            <!-- Latest compiled JavaScript -->
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> 
+        
+            <style>
+                body
+                {
+                    background: rgb(220, 228, 220);
+                }
+                .teacher-box
+                {
+                    padding-top:3%; 
+                    border : 1px solid black;
+                    float : left;
+                    height: 400px;
+                    width: 28%;
+                    margin-left:22%;
+                    margin-top: 150px;
+                    text-align: center;
+                    background: white;
+                    border: 1px solid white;
+                    box-shadow: -10px 10px 10px  gray;
+                }
+                .student-box
+                {
+                    padding-top:3%; 
+                    border : 1px solid black;
+                    float: right;
+                    height: 400px;
+                    width: 28%;
+                    margin-right:22%; 
+                    margin-top:150px;
+                    text-align: center;
+                    background: white;
+                    border: 1px solid white;
+                    box-shadow: 10px 10px 10px  gray;
+                }
+                .intro-text
+                {
+                    
+                    height: 150px;
+                    font-family:monospace;
+                    font-size: .8em;
+                    padding: 6%;
+                }
+                
+
+                .btn
+                {
+                    height: 40px;
+                    width : 90px;
+                    background: #32CD32;
+                    border : 1px solid #32cd32;
+                    margin-top: 50px;
+
+                }
+                #link
+                {
+                    text-decoration: none;
+                    color:white;
+                }
+                h2
+                {
+                    font-family: 'Times New Roman', Times, serif;
+                }
+               
+                
+            
+            </style>
     </head>
     <body>
-        {{model}}
-        <h2>teacher</h2>
-        <a href="/accounts/signup/teacher/">signup</a>
-        <a href = "/login/teacher">login</a>
-        <h2>student</h2>
-        <a href = "/accounts/signup/student/">signup</a>
-        <a href="/login/student/">login</a>
+        <div>
+            <div class="teacher-box">
+                <h2>Teacher</h2>
+                <div class="intro-text">Sign in as teacher to see and update(with csv file) the attendance of all students</div>
+                <button class="btn"><a id = "link"href = "/login/teacher">login</a></button>
+            </div>
+            <div class="student-box">
+                <h2>Student</h2>
+                <div class = "intro-text">Sign in as student to see your own attendance along with your percentage attendance,monthwise attendance and to check whether you are allowed to sit in exam or not.</div>
+                <button class="btn"><a id = "link"href="/login/student/">login</a></button>
+            </div>
+        </div>
     </body>
 </html>
