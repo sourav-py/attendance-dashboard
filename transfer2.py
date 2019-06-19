@@ -12,7 +12,7 @@ for i in data.values:
     username = i[0]
     password = i[1]
     first_name = i[2]
-    last_name = i[3]
+    last_name = ''
     data  = {
 		'username':username,
 		'password':password,

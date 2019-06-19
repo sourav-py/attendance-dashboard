@@ -424,13 +424,15 @@ def Attendance_Csv_Upload(request):
                     
                         
                 else:
-                    
                     for i in Attendance.objects.all():
                         sample= ""
                         for j in i.user.all():
                             sample += str(j.user.username)
                         if sample == username and i.month == month:
                             update_attendance_object = i
+            
+                    
+                    
                     if day == 'day1':
                         update_attendance_object.day1 = str(attendance)
                     if day == 'day2':
