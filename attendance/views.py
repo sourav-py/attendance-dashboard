@@ -502,7 +502,7 @@ def Attendance_Csv_Upload(request):
                     
                     
                     
-        return HttpResponse('post request process done......cheese!')
+        return HttpResponseRedirect('/students/')
                 
 
     return render(request, 'student_csv_upload.html')
