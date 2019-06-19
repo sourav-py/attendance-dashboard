@@ -220,7 +220,7 @@ def login_student(request):
                 
         else:
             whose_login = "student login page"
-            message = "please enter correct credentials(it must be of student)"
+            message = "please enter correct credentials(student's creds.)"
             return render(request,'registration/login.html',{'request':request,'message':message,'whose_login':whose_login})
     else:
         whose_login = "student login page"
@@ -238,7 +238,7 @@ def login_teacher(request):
                 return HttpResponseRedirect('/students/')
         else:
             whose_login = "teacher login page"
-            message = "please enter correct credentials(it must be of teacher)"
+            message = "please enter correct credentials(teacher's creds.)"
             return render(request,'registration/login.html',{'request':request,'message':message,'whose_login':whose_login})
     else:
         whose_login = "teacher login page"

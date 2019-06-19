@@ -1,34 +1,109 @@
 <html>
-    <head>
+    <head>  
+            <style>
+                *{
+			        box-sizing: border-box;
+		        }
+		        body{
+			        background-color: #3498DB;
+                    font-family: "Arial", sans-serif;
+                    padding: 50px;
+                }
+                .container{
+                    margin: 80px auto;
+                    padding: 10px;
+                    width: 350px;
+                    height: 370px;
+                    background-color: #fff;
+                    border-radius: 5px;
+                }
+                h1{
+                    width: 70%;
+                    color: #777;
+                    font-size: 32px;
+                    margin: 28px auto;
+                    margin-bottom: 20px;
+                    text-align: center;
+                    /*padding-top: 40px;*/
+                }
+                form{
+                    /*padding: 15px;*/
+                    text-align: center;
+                }
+                input{
+                    padding: 12px 0;
+                    margin-bottom: 10px;
+                    border-radius: 3px;
+                    border: 2px solid transparent;
+                    text-align: center;
+                    width: 90%;
+                    font-size: 16px;
+                    transition: border .2s, background-color .2s;
+                }
+                form .field{
+                    background-color: #ECF0F1;
+                }
+                form .field:focus {
+                    border: 2px solid #3498DB;
+                }
+                form .btn{
+                    background-color: #3498DB;
+                    color: #fff;
+                    line-height: 25px;
+                    cursor: pointer;
+                }
+                form .btn:hover,
+                form .btn:active {
+                    background-color: #1F78B4;
+                    border: 2px solid #1F78B4;
+                }
+                .pass-link{
+                    text-align: center;
+                }
+                .pass-link a:link,
+                .pass-link a:visited{
+                    font-size: 12px;
+                    color: #777;
+                }
+                .isa_info, .isa_success, .isa_warning, .isa_error {
+                    margin: 10px 0px;
+                    padding:12px;
+                
+                }
+                .isa_info {
+                    color: #00529B;
+                    background-color: #BDE5F8;
+                }
+                .isa_success {
+                    color: #4F8A10;
+                    background-color: #DFF2BF;
+                }
+                .isa_warning {
+                    color: #9F6000;
+                    background-color: #FEEFB3;
+                }
+                .isa_error {
+                    color: #D8000C;
+                    font-size: .8em;
+                    
+                }
+                
+            </style>
+
             <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 
     </head>
-    <body>
-            <h1>{{whose_login}}</h1>
-            <form method="post">
-            <h1>login</h1>
-            {{message}}
-            <div>
-                {% csrf_token %}
-                <div class="creds">
-                    <p>
-                    <label for="id_username">username</label>
-                    </p>
-                    <p>
-                    <input class="input" type="text" name="username" autofocus="" required="" id="id_username">
-                    </p>
-                </div>
-                <div class="creds">
-                    <p>
-                    <label for="id_password">password</label>
-                    </p>
-                    <p>
-                    <input class = "input"  type="password" name="password" required="" id="id_password">
-                    </p>
-                </div>	
-                <button class="login_button" type = "submit">login</button>
-            </div>
-            </form>
+    <body>  <div class = "container">
+                <!-----<h1>{{whose_login}}</h1>--->
+                <h1>login</h1>
+                <form method="post">
+                    <div class="isa_error">{{message}}</div>
+                   
+                    {% csrf_token %}
+                    <input class="field" type="text" name="username" autofocus="" required="" id="id_username">
+                    <input class = "field"  type="password" name="password" required="" id="id_password">
+                    <input type="submit" value="login" class="btn">
+                 </form>
         
     </body>
 </html>
