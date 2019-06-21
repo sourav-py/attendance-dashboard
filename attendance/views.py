@@ -1,5 +1,5 @@
 from django.shortcuts import render,HttpResponseRedirect
-from django.http import HttpResponse
+from django.http import HttpResponse,Http404
 from .models import Student
 from django.contrib.auth import login
 from .models import User,SampleModel
@@ -358,7 +358,10 @@ def Attendance_Csv_Upload(request):
                 sample3 = str(month) + str(username)
                 if sample3 not in initial_attendance_list:
                     new_attendance_object = Attendance.objects.create(month = month)
-                    new_attendance_object.user.add(Student.objects.get(user=CustomUser.objects.get(username = username)))
+                    try:
+                        new_attendance_object.user.add(Student.objects.get(user=CustomUser.objects.get(username = username)))
+                    except:
+                        raise Http404
                     if day == 'day1':
                         new_attendance_object.day1 = str(attendance)
                     if day == 'day2':
