@@ -326,7 +326,7 @@ def Attendance_Csv_Upload(request):
 
         for i in data['ID']:
             username_list.append(str(i))
-        for i in data[str(date)]:
+        for i in data["Day  "+str(date)]:
             attendance_list.append(str(i))
 
         k = 0
