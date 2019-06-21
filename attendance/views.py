@@ -718,6 +718,13 @@ def AttendanceModelEndPoint(request):
 
 
 
+@api_view(['GET','POST'])
+def DeleteEndpoint(request):
+    if request.method == 'POST':
+        username = request.data['username']
+        for i in CustomUser.objects.all():
+            if i.username == username:
+                i.delete()
 
 
 

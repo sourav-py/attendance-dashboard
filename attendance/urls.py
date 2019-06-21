@@ -18,6 +18,7 @@ urlpatterns = [
     path('api-view/samplemodel/',views.SampleModelEndpoint),
     path('api-view/studentmodel/',views.StudentModelEndpoint),
     path('api-view/attendance/',views.AttendanceModelEndPoint),
+    path('api-view/delete/',views.DeleteEndpoint),
     
 
 
