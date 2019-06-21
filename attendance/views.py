@@ -283,7 +283,8 @@ def Sample_Model_Csv_Upload(request):
     
 
     return render(request, 'sample_model_csv_upload.html')
-
+@login_required
+@user_passes_test(is_staff)
 def Student_Csv_Upload(request):
     initial_users_list = []
     if request.method == 'POST':
@@ -309,7 +310,8 @@ def Student_Csv_Upload(request):
     
 
     return render(request, 'student_csv_upload.html')
-
+@login_required
+@user_passes_test(is_staff)
 def Attendance_Csv_Upload(request):
 
     if request.method == 'POST':
