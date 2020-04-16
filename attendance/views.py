@@ -19,6 +19,8 @@ from datetime import datetime
 from attendance.serializers import SampleModelSerializer
 from django.views.decorators.cache import never_cache,cache_control
 
+
+#To check if the user which made the request is a staff memeber or not
 def is_staff(user):
     object = CustomUser.objects.get(id = user.id)
     if object.is_teacher == True:
@@ -26,9 +28,13 @@ def is_staff(user):
     else:
         return False
 
+
+#Testing
 def is_student_teacher_admin(user):
     pass
 
+
+#Count total attendance of student
 def count_attendance(id):
     count = 0
     student_object = Student.objects.get(id = id)
@@ -99,6 +105,9 @@ def count_attendance(id):
     return count
 
 
+
+#Calculate working days
+#Need to optimize that
 def out_of_attendance(id):
     count = 0
     student_object = Student.objects.get(id = id)
@@ -170,6 +179,7 @@ def out_of_attendance(id):
 
 
 
+#Welcome page
 def base(request):
     return render(request,'base.html',{'request':request})
 
@@ -722,7 +732,8 @@ def AttendanceModelEndPoint(request):
         return HttpResponse(sample)
 
 
-
+#ENDPOINT TO DELETE A USER FROM DB
+#TAKES USERNAME(UNIQUE) AS ARGUMENT
 @api_view(['GET','POST'])
 def DeleteEndpoint(request):
     if request.method == 'POST':

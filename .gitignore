@@ -1,0 +1,4 @@
+.vscode
+attendance/__pycache__/
+djangocv4/__pycache__/
+attendance/migrations/__pycache__/
