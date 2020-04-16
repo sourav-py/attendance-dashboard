@@ -1,3 +1,4 @@
+spenv/
 .vscode
 attendance/__pycache__/
 djangocv4/__pycache__/
