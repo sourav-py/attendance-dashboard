@@ -1,6 +1,6 @@
 # attendance-dashboard
 This web application is for storing and retrieving attendance information of registered entities through APIS.
-<p>It provides functionalities following functinalities</p>
+<p>It provides the following functinalities</p>
  <ul>
   <li>A graphical dashboard to show users's information and attendance details.</li>
   <li>A view to upload attendance of students using csv file.</li>
