@@ -1,6 +1,7 @@
 # attendance-dashboard
+## About
 This web application is for storing and retrieving attendance information of registered entities through APIS.
-<p>It provides the following functinalities</p>
+<p>It provides the following functionalities</p>
  <ul>
   <li>A graphical dashboard to show users's information and attendance details.</li>
   <li>A view to upload attendance of students using csv file.</li>
@@ -8,6 +9,13 @@ This web application is for storing and retrieving attendance information of reg
   <li>An endpoint to create an attendance object(For a given day and a user)</li>
 
 </ul>
+
+## Tech Stack
+<ol>
+ <li>Python</li>
+ <li>Django</li>
+ <li>HTML, CSS</li>
+</ol>
 
 ## Login page
 ![login view](https://github.com/sourav-py/attendance-dashboard/blob/master/Demo%20images/login.png)
